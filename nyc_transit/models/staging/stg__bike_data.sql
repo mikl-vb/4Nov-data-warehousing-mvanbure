@@ -4,7 +4,8 @@ with source as (
 
 ),
 
--- cleaning helped with chatgpt
+-- cleaning helped with chatgpt 
+-- asked to provide dbt file in clean format based on case values from data source
 renamed as (
     select 
         tripduration::bigint as trip_duration_mins,
@@ -29,7 +30,6 @@ renamed as (
         
         -- "end station latitude" as end_lat,
         -- "end station longitude" as eng_long,
-
         
         bikeid as bike_id,
         usertype as user_type,

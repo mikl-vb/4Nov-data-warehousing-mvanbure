@@ -5,6 +5,7 @@ with source as (
 ),
 
 -- cleaning helped with chatgpt
+-- asked to provide dbt file in clean format based on case values from data source
 -- definitions from: https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_yellow.pdf
 renamed as (
     select 

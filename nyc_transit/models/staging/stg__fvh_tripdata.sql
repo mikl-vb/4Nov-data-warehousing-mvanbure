@@ -5,6 +5,7 @@ with source as (
 ),
 
 -- cleaning helped with chatgpt
+-- asked to provide dbt file in clean format based on case values from data source
 renamed as (
     select 
         -- Assuming the base numbers are alphanumeric, we'll just trim whitespace

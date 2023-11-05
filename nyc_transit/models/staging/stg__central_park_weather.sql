@@ -4,7 +4,7 @@ with source as (
 
 ),
 
--- cleaning helped with chatgpt
+-- data sourced from instruction video 
 renamed as (
     select 
         station,

@@ -5,6 +5,7 @@ with source as (
 ),
 
 -- clean up helped with chatgpt
+-- asked to provide dbt file in clean format based on case values from data source
 renamed as (
     select 
         hvfhs_license_num,
