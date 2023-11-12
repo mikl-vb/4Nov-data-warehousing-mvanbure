@@ -1,28 +1,24 @@
 with source as (
 
-    select * from {{source('main', 'fhvhv_tripdata') }}
+    select * from {{ source('main', 'fhvhv_tripdata') }}
 
 ),
 
--- clean up helped with chatgpt
--- asked to provide dbt file in clean format based on case values from data source
 renamed as (
-    select 
+
+    select
         hvfhs_license_num,
-        dispatching_base_num,
-        originating_base_num,
+        trim(upper(dispatching_base_num)) as dispatching_base_num,
+        trim(upper(originating_base_num)) as originating_base_num,
         request_datetime,
         on_scene_datetime,
         pickup_datetime,
         dropoff_datetime,
-        pulocationid AS pu_location_id,
-        dolocationid AS do_location_id,
+        pulocationid,
+        dolocationid,
         trip_miles,
         trip_time,
-        CASE
-            WHEN base_passenger_fare >= 0 THEN base_passenger_fare
-            ELSE NULL -- or some other default value if negative values should be replaced rather than set to NULL
-        END AS base_passenger_fare, -- negative fares are now ignored
+        base_passenger_fare,
         tolls,
         bcf,
         sales_tax,
@@ -30,24 +26,15 @@ renamed as (
         airport_fee,
         tips,
         driver_pay,
-        CASE WHEN shared_request_flag = 'Y' THEN TRUE
-             WHEN shared_request_flag = 'N' THEN FALSE
-             ELSE NULL END AS shared_request_flag,
-        CASE WHEN shared_match_flag = 'Y' THEN TRUE
-             WHEN shared_match_flag = 'N' THEN FALSE
-             ELSE NULL END AS shared_match_flag,
-        CASE WHEN access_a_ride_flag = 'Y' THEN TRUE
-             WHEN access_a_ride_flag = 'N' THEN FALSE
-             ELSE NULL END AS access_a_ride_flag,
-        CASE WHEN wav_request_flag = 'Y' THEN TRUE
-             WHEN wav_request_flag = 'N' THEN FALSE
-             ELSE NULL END AS wav_request_flag, 
-        CASE WHEN wav_match_flag = 'Y' THEN TRUE
-             WHEN wav_match_flag = 'N' THEN FALSE
-             ELSE NULL END AS wav_match_flag,
+        {{flag_to_bool("shared_request_flag")}} as shared_request_flag,
+        {{flag_to_bool("shared_match_flag")}} as shared_match_flag,
+        {{flag_to_bool("access_a_ride_flag")}} as access_a_ride_flag,
+        {{flag_to_bool("wav_request_flag")}} as wav_request_flag,
+        {{flag_to_bool("wav_match_flag",)}} as wav_match_flag,
         filename
 
     from source
+
 )
 
 select * from renamed

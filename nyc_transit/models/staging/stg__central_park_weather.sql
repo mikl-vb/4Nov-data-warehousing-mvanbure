@@ -1,24 +1,34 @@
 with source as (
 
-    select * from {{source('main', 'central_park_weather') }}
+    select * from {{ source('main', 'central_park_weather') }}
 
 ),
 
--- data sourced from instruction video 
 renamed as (
-    select 
+
+    select
         station,
         name,
-        date,
+        date::date as date,
         awnd::double as awnd,
         prcp::double as prcp,
         snow::double as snow,
         snwd::double as snwd,
         tmax::int as tmax,
         tmin::int as tmin,
-        trim(filename) as filename
+        filename
 
     from source
+
 )
 
-select * from renamed
+select 
+    date,
+    awnd,
+    prcp,
+    snow,
+    snwd,
+    tmax,
+    tmin,
+    filename
+from renamed
