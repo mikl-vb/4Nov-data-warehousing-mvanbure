@@ -1,0 +1,85 @@
+models:
+  - name: stg__fhv_bases
+    description: ""
+    columns:
+      - name: base_number
+        data_type: varchar
+        description: ""
+
+      - name: base_name
+        data_type: varchar
+        description: ""
+
+      - name: dba
+        data_type: varchar
+        description: ""
+
+      - name: dba_category
+        data_type: varchar
+        description: ""
+
+      - name: filename
+        data_type: varchar
+        description: ""
+
+  - name: stg__bike_data
+    description: ""
+    columns:
+      - name: started_at_ts
+        data_type: timestamp
+        description: ""
+        tests: 
+
+          - dbt_expectations.expect_column_to_exist
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: timestamp
+
+      - name: ended_at_ts
+        data_type: timestamp
+        description: ""
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_to_exist
+
+      - name: tripduration
+        data_type: bigint
+        description: ""
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_to_exist
+
+      - name: start_station_id
+        data_type: varchar
+        description: ""
+
+      - name: start_station_name
+        data_type: varchar
+        description: ""
+
+      - name: start_lat
+        data_type: double
+        description: ""
+
+      - name: start_lng
+        data_type: double
+        description: ""
+
+      - name: end_station_id
+        data_type: varchar
+        description: ""
+
+      - name: end_station_name
+        data_type: varchar
+        description: ""
+
+      - name: end_lat
+        data_type: double
+        description: ""
+
+      - name: end_lng
+        data_type: double
+        description: ""
+
+      - name: filename
+        data_type: varchar
+        description: ""
