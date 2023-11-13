@@ -80,6 +80,12 @@ sources:
         columns:
           - name: station
             data_type: CHARACTER VARYING(256)
+            description: "Station identifier"
+            tests:
+              - dbt_expectations.expect_column_to_exist
+              - unique:
+                  config:
+                    severity: warn
           - name: name
             data_type: CHARACTER VARYING(256)
             description: "Station name"
@@ -136,8 +142,16 @@ sources:
                     severity: warn
           - name: pickup_datetime
             data_type: TIMESTAMP
+            tests:  
+              - not_null
+            config: 
+              severity: warn
           - name: dropoff_datetime
             data_type: TIMESTAMP
+            tests:  
+              - not_null
+            config: 
+              severity: warn
           - name: pulocationid
             data_type: DOUBLE
           - name: dolocationid

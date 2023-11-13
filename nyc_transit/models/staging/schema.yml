@@ -83,3 +83,419 @@ models:
       - name: filename
         data_type: varchar
         description: ""
+
+
+  - name: stg__fhv_bases
+    description: ""
+    columns:
+      - name: base_number
+        data_type: varchar
+        description: ""
+
+      - name: base_name
+        data_type: varchar
+        description: ""
+
+      - name: dba
+        data_type: varchar
+        description: ""
+
+
+  - name: stg__fhv_bases
+    description: ""
+    columns:
+      - name: base_number
+        data_type: varchar
+        description: ""
+
+      - name: base_name
+        data_type: varchar
+        description: ""
+
+      - name: dba
+        data_type: varchar
+        description: ""
+
+
+  - name: stg__fhvhv_tripdata
+    description: ""
+    columns:
+      - name: hvfhs_license_num
+        data_type: varchar
+        description: ""
+
+      - name: dispatching_base_num
+        data_type: varchar
+        description: ""
+
+      - name: originating_base_num
+        data_type: varchar
+        description: ""
+
+      - name: request_datetime
+        data_type: timestamp
+        description: ""
+
+      - name: on_scene_datetime
+        data_type: timestamp
+        description: ""
+
+      - name: pickup_datetime
+        data_type: timestamp
+        description: "The date and time of the trip pick-up"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_to_exist
+
+      - name: dropoff_datetime
+        data_type: timestamp
+        description: ""
+
+      - name: pulocationid
+        data_type: bigint
+        description: ""
+
+      - name: dolocationid
+        data_type: bigint
+        description: ""
+
+      - name: trip_miles
+        data_type: double
+        description: "Total miles for passenger trip"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0 # (optional)
+              max_value: 5000 # (optional)
+
+      - name: trip_time
+        data_type: bigint
+        description: ""
+
+      - name: base_passenger_fare
+        data_type: double
+        description: "Ride fare before tolls, taxes, tips, etc."
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+              config:
+                severity: warn
+
+      - name: tolls
+        data_type: double
+        description: ""
+
+      - name: bcf
+        data_type: double
+        description: "Fare related to black car fund"
+
+      - name: sales_tax
+        data_type: double
+        description: ""
+
+      - name: congestion_surcharge
+        data_type: double
+        description: ""
+
+      - name: airport_fee
+        data_type: double
+        description: ""
+
+      - name: tips
+        data_type: double
+        description: ""
+
+      - name: driver_pay
+        data_type: double
+        description: ""
+
+      - name: shared_request_flag
+        data_type: boolean
+        description: ""
+
+      - name: shared_match_flag
+        data_type: boolean
+        description: "Boolean if ride was shared"
+
+      - name: access_a_ride_flag
+        data_type: boolean
+        description: ""
+
+      - name: wav_request_flag
+        data_type: boolean
+        description: ""
+
+      - name: wav_match_flag
+        data_type: boolean
+        description: ""
+
+      - name: filename
+        data_type: varchar
+        description: ""
+
+  - name: stg__fhv_tripdata
+    description: ""
+    columns:
+      - name: dispatching_base_num
+        data_type: varchar
+        description: ""
+
+      - name: pickup_datetime
+        data_type: timestamp
+        description: ""
+
+      - name: dropoff_datetime
+        data_type: timestamp
+        description: ""
+
+      - name: pulocationid
+        data_type: double
+        description: ""
+
+      - name: dolocationid
+        data_type: double
+        description: ""
+
+      - name: affiliated_base_number
+        data_type: varchar
+        description: ""
+
+      - name: filename
+        data_type: varchar
+        description: ""
+
+  - name: stg__central_park_weather
+    description: ""
+    columns:
+      - name: date
+        data_type: date
+        description: ""
+
+      - name: awnd
+        data_type: double
+        description: ""
+
+      - name: prcp
+        data_type: double
+        description: ""
+
+      - name: snow
+        data_type: double
+        description: ""
+
+      - name: snwd
+        data_type: double
+        description: ""
+
+      - name: tmax
+        data_type: integer
+        description: ""
+
+      - name: tmin
+        data_type: integer
+        description: ""
+
+      - name: filename
+        data_type: varchar
+        description: ""
+
+  - name: stg__green_tripdata
+    description: ""
+    columns:
+      - name: vendorid
+        data_type: bigint
+        description: "A code indicating the LPEP provider that provided the record.
+                            1= Creative Mobile Technologies, LLC; 
+                            2= VeriFone Inc."
+
+      - name: lpep_pickup_datetime
+        data_type: timestamp
+        description: "The date and time when the meter was engaged."
+
+      - name: lpep_dropoff_datetime
+        data_type: timestamp
+        description: "The date and time when the meter was disengaged."
+
+      - name: store_and_fwd_flag
+        data_type: boolean
+        description: "This flag indicates whether the trip record was held in vehicle
+                          memory before sending to the vendor, aka “store and forward,”
+                          because the vehicle did not have a connection to the server.
+                            Y= store and forward trip
+                            N= not a store and forward trip"
+
+      - name: ratecodeid
+        data_type: double
+        description: "The final rate code in effect at the end of the trip.
+                            1= Standard rate
+                            2=JFK
+                            3=Newark
+                            4=Nassau or Westchester
+                            5=Negotiated fare
+                            6=Group ride"
+
+      - name: pulocationid
+        data_type: bigint
+        description: ""
+
+      - name: dolocationid
+        data_type: bigint
+        description: ""
+
+      - name: passenger_count
+        data_type: integer
+        description: ""
+
+      - name: trip_distance
+        data_type: double
+        description: ""
+
+      - name: fare_amount
+        data_type: double
+        description: ""
+
+      - name: extra
+        data_type: double
+        description: ""
+
+      - name: mta_tax
+        data_type: double
+        description: ""
+
+      - name: tip_amount
+        data_type: double
+        description: ""
+
+      - name: tolls_amount
+        data_type: double
+        description: ""
+
+      - name: improvement_surcharge
+        data_type: double
+        description: "$0.30 improvement surcharge assessed on hailed trips at the flag
+                          drop. The improvement surcharge began being levied in 2015."
+
+      - name: total_amount
+        data_type: double
+        description: ""
+
+      - name: payment_type
+        data_type: double
+        description: ""
+
+      - name: trip_type
+        data_type: double
+        description: "A code indicating whether the trip was a street-hail or a dispatch
+                          that is automatically assigned based on the metered rate in use but
+                          can be altered by the driver.
+                            1= Street-hail
+                            2= Dispatch"
+
+      - name: congestion_surcharge
+        data_type: double
+        description: ""
+
+      - name: filename
+        data_type: varchar
+        description: ""
+
+  - name: stg__yellow_tripdata
+    description: ""
+    columns:
+      - name: vendorid
+        data_type: bigint
+        description: "A code indicating the TPEP provider that provided the record. 
+                          1= Creative Mobile Technologies, LLC; 
+                          2= VeriFone Inc."
+
+      - name: tpep_pickup_datetime
+        data_type: timestamp
+        description: "The date and time when the meter was engaged."
+
+
+      - name: tpep_dropoff_datetime
+        data_type: timestamp
+        description: "The date and time when the meter was disengaged."
+
+      - name: passenger_count
+        data_type: integer
+        description: "The number of passengers in the vehicle."
+
+      - name: trip_distance
+        data_type: double
+        description: "The elapsed trip distance in miles reported by the taximeter."
+
+      - name: ratecodeid
+        data_type: double
+        description: "The final rate code in effect at the end of the trip.
+                            1 = Standard rate
+                            2 = JFK
+                            3 = Newark
+                            4 = Nassau or Westchester
+                            5 = Negotiated fare
+                            6 = Group ride"
+
+      - name: store_and_fwd_flag
+        data_type: boolean
+        description: "This flag indicates whether the trip record was held in vehicle
+                          memory before sending to the vendor, aka “store and forward,”
+                          because the vehicle did not have a connection to the server.
+                          Y= store and forward trip
+                          N= not a store and forward trip"
+
+      - name: pulocationid
+        data_type: bigint
+        description: "TLC Taxi Zone in which the taximeter was engaged"
+
+      - name: dolocationid
+        data_type: bigint
+        description: ""
+
+      - name: payment_type
+        data_type: bigint
+        description: "A numeric code signifying how the passenger paid for the trip.
+                            1= Credit card
+                            2= Cash
+                            3= No charge
+                            4= Dispute
+                            5= Unknown
+                            6= Voided trip"
+
+      - name: fare_amount
+        data_type: double
+        description: ""
+
+      - name: extra
+        data_type: double
+        description: ""
+
+      - name: mta_tax
+        data_type: double
+        description: ""
+
+      - name: tip_amount
+        data_type: double
+        description: ""
+
+      - name: tolls_amount
+        data_type: double
+        description: ""
+
+      - name: improvement_surcharge
+        data_type: double
+        description: ""
+
+      - name: total_amount
+        data_type: double
+        description: ""
+
+      - name: congestion_surcharge
+        data_type: double
+        description: ""
+
+      - name: airport_fee
+        data_type: double
+        description: "$1.25 for pick up only at LaGuardia and John F. Kennedy Airports"
+
+      - name: filename
+        data_type: varchar
+        description: ""
