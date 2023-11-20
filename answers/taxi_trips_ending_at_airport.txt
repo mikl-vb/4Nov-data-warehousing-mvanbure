@@ -1,0 +1,6 @@
+D .read analyses/taxi_trips_ending_at_airport.sql
++--------------------------------+
+| total_trips_ending_at_airports |
++--------------------------------+
+| 1062928                        |
++--------------------------------+
