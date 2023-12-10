@@ -1,4 +1,6 @@
-SELECT
+-- find the moving average for precipitation & snow
+
+select
 	date,
 	min(prcp) over seven_days as min_prcp,
 	max(prcp) over seven_days as max_prcp,
@@ -8,10 +10,10 @@ SELECT
 	max(snow) over seven_days as max_snow,
 	avg(snow) over seven_days as avg_snow,
 	sum(snow) over seven_days as sum_snow
-FROM {{ ref('stg__central_park_weather') }} wx
--- FROM staging.stg__central_park_weather wx 
+from {{ ref('stg__central_park_weather') }} wx
+-- from staging.stg__central_park_weather wx 
 WINDOW seven_days as (
-	ORDER BY date ASC 
+	order by date ASC 
 	RANGE BETWEEN INTERVAL 3 DAYS PRECEDING AND 
 			    INTERVAL 3 DAYS FOLLOWING)
     limit 100

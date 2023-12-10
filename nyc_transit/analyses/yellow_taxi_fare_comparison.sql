@@ -1,4 +1,6 @@
-SELECT
+-- compare fares of different areas for yellow taxis
+
+select
 	yellow.fare_amount,
 	loc.Borough as boro,
 	avg(yellow.fare_amount) 
@@ -11,7 +13,7 @@ SELECT
 	avg(yellow.fare_amount) 
 		OVER (PARTITION BY TRUE)
 		as all_trips_avg
-FROM
+from
 	{{ ref('stg__yellow_tripdata') }} yel
 	-- staging.stg__yellow_tripdata yellow 
 	inner join

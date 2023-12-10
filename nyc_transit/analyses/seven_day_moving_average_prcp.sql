@@ -1,3 +1,5 @@
+-- find moving avg of precipitation for central park
+
 select 
     date,
     AVG(prcp) OVER (

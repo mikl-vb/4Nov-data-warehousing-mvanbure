@@ -1,3 +1,5 @@
+-- find zones with less than 100k taxi trips
+
 select
     t.pu_zone,
     count(*) AS trips
