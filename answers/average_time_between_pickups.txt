@@ -1,0 +1,2 @@
+'Zone','avg_mins_between_pickups'
+'Bloomingdale',14.365381990883532737

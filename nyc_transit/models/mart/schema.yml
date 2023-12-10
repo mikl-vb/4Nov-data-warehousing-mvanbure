@@ -108,3 +108,45 @@ models:
 
       - name: duration_sec
         description: ""
+  
+  - name: mart__fact_trips_by_borough
+    description: "number of trips grouped by borough"
+    columns:
+      - name: type
+        description: ""
+      
+      - name: pickup_datetime
+        description: ""
+
+      - name: dropoff_datetime
+        description: ""
+      
+      - name: duration_min
+        description: ""
+
+      - name: duration_sec
+        description: ""
+      
+      - name: pulocationid
+        description: ""
+
+      - name: pu_borough
+        description: ""
+      
+      - name: pu_zone
+        description: ""
+      
+      - name: pu_service_zone
+        description: ""
+
+      - name: dolocationid
+        description: ""
+
+      - name: do_borough
+        description: ""
+      
+      - name: do_zone
+        description: ""
+      
+      - name: do_service_zone
+        description: ""

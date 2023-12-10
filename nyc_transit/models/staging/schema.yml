@@ -85,37 +85,6 @@ models:
         description: ""
 
 
-  - name: stg__fhv_bases
-    description: ""
-    columns:
-      - name: base_number
-        data_type: varchar
-        description: ""
-
-      - name: base_name
-        data_type: varchar
-        description: ""
-
-      - name: dba
-        data_type: varchar
-        description: ""
-
-
-  - name: stg__fhv_bases
-    description: ""
-    columns:
-      - name: base_number
-        data_type: varchar
-        description: ""
-
-      - name: base_name
-        data_type: varchar
-        description: ""
-
-      - name: dba
-        data_type: varchar
-        description: ""
-
 
   - name: stg__fhvhv_tripdata
     description: ""
