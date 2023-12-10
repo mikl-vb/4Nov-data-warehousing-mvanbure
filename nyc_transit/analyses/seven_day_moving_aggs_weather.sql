@@ -1,15 +1,17 @@
-select 
-    date,
-    avg(precipitation) OVER seven_days as seven_day_prcp_avg,
-    min(precipitation) OVER seven_days as seven_day_prcp_min,
-    max(precipitation) OVER seven_days as seven_day_prcp_max,
-    sum(precipitation) OVER seven_days as seven_day_prcp_sum,
-    avg(snow_fall) OVER seven_days as seven_day_snow_avg,
-    min(snow_fall) OVER seven_days as seven_day_snow_min,
-    max(snow_fall) OVER seven_days as seven_day_snow_max,
-    sum(snow_fall) OVER seven_days as seven_day_snow_sum,
-from staging.stg__central_park_weather--{{ref('stg__central_park_weather')}}
-WINDOW seven_days AS (
-    ORDER BY date ASC 
-    RANGE BETWEEN INTERVAL 3 DAYS PRECEDING 
-    AND INTERVAL 3 DAYS FOLLOWING);
+SELECT
+	date,
+	min(prcp) over seven_days as min_prcp,
+	max(prcp) over seven_days as max_prcp,
+	avg(prcp) over seven_days as avg_prcp,
+	sum(prcp) over seven_days as sum_prcp,
+	min(snow) over seven_days as min_snow,
+	max(snow) over seven_days as max_snow,
+	avg(snow) over seven_days as avg_snow,
+	sum(snow) over seven_days as sum_snow
+FROM {{ ref('stg__central_park_weather') }} wx
+-- FROM staging.stg__central_park_weather wx 
+WINDOW seven_days as (
+	ORDER BY date ASC 
+	RANGE BETWEEN INTERVAL 3 DAYS PRECEDING AND 
+			    INTERVAL 3 DAYS FOLLOWING)
+    limit 100

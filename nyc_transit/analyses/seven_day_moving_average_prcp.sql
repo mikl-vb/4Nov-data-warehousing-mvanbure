@@ -1,9 +1,9 @@
 select 
     date,
-    avg(precipitation) OVER 
-        (order by date asc 
-        range between INTERVAL 3 DAYS PRECEDING 
-        and INTERVAL 3 DAYS FOLLOWING)
-        as seven_day_prcp_avg
--- from {{ref('stg__central_park_weather')}};
-from staging.stg__central_park_weather;
+    AVG(prcp) OVER (
+        ORDER BY date
+        RANGE BETWEEN INTERVAL 3 DAYS PRECEDING AND INTERVAL 3 DAYS FOLLOWING
+    ) AS seven_day_moving_avg_prcp
+from {{ ref('stg__central_park_weather') }} wx
+-- from staging.stg__central_park_weather 
+limit 100;
